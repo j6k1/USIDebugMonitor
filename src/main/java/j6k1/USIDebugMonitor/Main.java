@@ -143,19 +143,21 @@ public class Main extends JFrame {
 					e.printStackTrace();
 				}
 			}
+
+			try {
+				engine.write("quit\n");
+				engine.flush();
+				Main.this.dispose();
+			} catch (IOException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
+			}
 		});
 
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				n.invoke();
-				try {
-					engine.write("quit\n");
-					engine.flush();
-					Main.this.dispose();
-				} catch (IOException err) {
-					err.printStackTrace();
-				}
 			}
 			@Override
 			public void windowClosed(WindowEvent e) {
