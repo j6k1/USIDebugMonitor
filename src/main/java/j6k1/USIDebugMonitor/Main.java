@@ -11,12 +11,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -55,6 +57,8 @@ public class Main extends JFrame {
 	 * @throws InterruptedException
 	 */
 	public Main(ProcessBuilder pb) throws IOException, InterruptedException {
+		Map<String,String> env = pb.environment();
+		env.put("RUST_BACKTRACE", "1");
 		NotifyQuit n = new NotifyQuit();
 
 		setTitle("USIDebugMonitor");
@@ -66,11 +70,15 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 
 		console = new JTextArea();
-		console.setPreferredSize(new Dimension(750, 540));
+		console.setRows(32);
 		console.setBackground(Color.BLACK);
 		console.setForeground(Color.WHITE);
 		console.setEditable(false);
-		contentPane.add(console, BorderLayout.NORTH);
+		JScrollPane scrollPanel = new JScrollPane(console,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel.setPreferredSize(new Dimension(750, 530));
+		contentPane.add(scrollPanel, BorderLayout.NORTH);
 		console.setColumns(10);
 
 		this.errorWindow = new ErrorWindow();
@@ -98,6 +106,7 @@ public class Main extends JFrame {
 								String lines = console.getText();
 								console.setText(lines + "<" + output + "\r\n");
 							});
+							this.revalidate();
 						} else {
 							break;
 						}
@@ -110,6 +119,7 @@ public class Main extends JFrame {
 								String lines = this.errorWindow.getText();
 								this.errorWindow.setText(lines + output + "\r\n");
 							});
+							this.errorWindow.revalidate();
 						} else {
 							break;
 						}
@@ -123,6 +133,7 @@ public class Main extends JFrame {
 								String lines = console.getText();
 								console.setText(lines + ">" + output + "\r\n");
 							});
+							this.revalidate();
 						} else {
 							break;
 						}

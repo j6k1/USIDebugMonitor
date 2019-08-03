@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -41,14 +42,16 @@ public class ErrorWindow extends JFrame {
 		setContentPane(contentPane);
 
 		console = new JTextArea();
-		console.setPreferredSize(new Dimension(750, 550));
+		console.setRows(32);
 		console.setEditable(false);
 		console.setForeground(Color.WHITE);
 		console.setBackground(Color.BLACK);
-		contentPane.add(console, BorderLayout.NORTH);
+		JScrollPane scrollPanel = new JScrollPane(console,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		contentPane.add(scrollPanel, BorderLayout.NORTH);
 		console.setColumns(10);
 		this.setVisible(true);
-		this.setAlwaysOnTop(true);
 	}
 
 	public String getText() {
