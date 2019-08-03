@@ -105,8 +105,8 @@ public class Main extends JFrame {
 							EventQueue.invokeLater(() -> {
 								String lines = console.getText();
 								console.setText(lines + "<" + output + "\r\n");
+								this.revalidate();
 							});
-							this.revalidate();
 						} else {
 							break;
 						}
@@ -118,8 +118,8 @@ public class Main extends JFrame {
 							EventQueue.invokeLater(() -> {
 								String lines = this.errorWindow.getText();
 								this.errorWindow.setText(lines + output + "\r\n");
+								this.errorWindow.revalidate();
 							});
-							this.errorWindow.revalidate();
 						} else {
 							break;
 						}
@@ -132,8 +132,8 @@ public class Main extends JFrame {
 							EventQueue.invokeLater(() -> {
 								String lines = console.getText();
 								console.setText(lines + ">" + output + "\r\n");
+								this.revalidate();
 							});
-							this.revalidate();
 						} else {
 							break;
 						}
