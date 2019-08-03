@@ -42,6 +42,7 @@ public class ErrorWindow extends JFrame {
 		setContentPane(contentPane);
 
 		console = new JTextArea();
+		console.setLineWrap(true);
 		console.setRows(32);
 		console.setEditable(false);
 		console.setForeground(Color.WHITE);

@@ -70,6 +70,7 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 
 		console = new JTextArea();
+		console.setLineWrap(true);
 		console.setRows(32);
 		console.setBackground(Color.BLACK);
 		console.setForeground(Color.WHITE);
