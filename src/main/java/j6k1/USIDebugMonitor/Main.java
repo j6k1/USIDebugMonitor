@@ -146,7 +146,7 @@ public class Main extends JFrame {
 			}
 
 			try {
-				engine.write("quit\n");
+				engine.write("quit\r\n");
 				engine.flush();
 				Main.this.dispose();
 			} catch (IOException e1) {
