@@ -127,14 +127,16 @@ public class Main extends JFrame {
 					}
 					if (guiout.ready()) {
 						String output = guiout.readLine();
-						if (output != null && output.isEmpty()) {
-							engine.write(output + "\r\n");
-							engine.flush();
-							EventQueue.invokeLater(() -> {
-								String lines = console.getText();
-								console.setText(lines + ">" + output + "\r\n");
-								this.revalidate();
-							});
+						if (output != null) {
+							if (!output.isEmpty()) {
+								engine.write(output + "\r\n");
+								engine.flush();
+								EventQueue.invokeLater(() -> {
+									String lines = console.getText();
+									console.setText(lines + ">" + output + "\r\n");
+									this.revalidate();
+								});
+							}
 						} else {
 							break;
 						}
