@@ -127,8 +127,8 @@ public class Main extends JFrame {
 					}
 					if (guiout.ready()) {
 						String output = guiout.readLine();
-						if (output != null) {
-							engine.write(output + "\n");
+						if (output != null && output.isEmpty()) {
+							engine.write(output + "\r\n");
 							engine.flush();
 							EventQueue.invokeLater(() -> {
 								String lines = console.getText();
